@@ -1,0 +1,3 @@
+[submodule "W3C_VehicleSignalInterfaceImpl"]
+	path = W3C_VehicleSignalInterfaceImpl
+	url = https://github.com/MEAE-GOT/W3C_VehicleSignalInterfaceImpl
