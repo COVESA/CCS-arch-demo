@@ -1,3 +1,6 @@
 [submodule "W3C_VehicleSignalInterfaceImpl"]
 	path = W3C_VehicleSignalInterfaceImpl
 	url = https://github.com/MEAE-GOT/W3C_VehicleSignalInterfaceImpl
+[submodule "ccs-w3c-client"]
+	path = ccs-w3c-client
+	url = https://github.com/GENIVI/ccs-w3c-client
