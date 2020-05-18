@@ -1,0 +1,9 @@
+language: minimal
+
+services:
+  - docker
+
+script:
+  - cd docker/gen2-server
+  - make build
+
