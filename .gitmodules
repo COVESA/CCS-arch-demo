@@ -6,3 +6,6 @@
 	path = ccs-w3c-client
 	url = https://github.com/GENIVI/ccs-w3c-client
 	branch = master
+[submodule "vss-feeder"]
+	path = vss-feeder
+	url = https://github.com/GENIVI/vss-feeder
