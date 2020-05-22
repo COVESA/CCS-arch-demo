@@ -9,11 +9,11 @@ RUN /tmp/tzdata.sh
 # Install the rest of the needed packages
 RUN apt-get install -y git golang screen psmisc curl
 
-# Fetch and run server
+# Fetch, build and sanity-test server
 RUN mkdir /server
 WORKDIR /server
 RUN git clone https://github.com/MEAE-GOT/W3C_VehicleSignalInterfaceImpl .
 RUN go build
-ADD tests/test.sh /server/
-RUN /server/test.sh
+ADD tests/build-sanity.sh /server/
+RUN /server/build-sanity.sh
 
