@@ -4,3 +4,6 @@
 [submodule "ccs-w3c-client"]
 	path = ccs-w3c-client
 	url = https://github.com/GENIVI/ccs-w3c-client
+[submodule "vehicle_signal_specification"]
+	path = vehicle_signal_specification
+	url = https://github.com/GENIVI/vehicle_signal_specification
