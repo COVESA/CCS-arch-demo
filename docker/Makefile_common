@@ -36,7 +36,7 @@ network:
 # Run default CMD (from Dockerfile), or whatever is specified if $CMD # variable was set
 run: datadir network
 	echo ${SHARED_DATA_DIR}
-	${FRONTEND} run -ti -h "${CONTAINER_HOSTNAME}" -d --network=${NETWORK} -v "${SHARED_DATA_DIR}:/data:z" --name=${CONTAINER_NAME} ${IMAGE_NAME} ${CMD}
+	${FRONTEND} run -ti -h "${CONTAINER_HOSTNAME}" ${PORTMAPS} -d --network=${NETWORK} -v "${SHARED_DATA_DIR}:/data:z" --name=${CONTAINER_NAME} ${IMAGE_NAME} ${CMD}
 
 clean: kill rm rmi
 
