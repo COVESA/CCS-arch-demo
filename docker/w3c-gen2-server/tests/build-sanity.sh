@@ -19,13 +19,13 @@ fi
 
 # Now try interacting with the server
 
-NODE=Vehicle/Cabin/Door/Row1/Right/IsOpen
+NODE=Vehicle/Cabin/DriverPosition
 PORT=8888
 
 # There seems to be a bit of startup time...
 # This feels not very robust, but delay is needed otherwise
 # the first fetch fails.
-sleep 4
+sleep 6
 
 curl -s http://127.0.0.1:$PORT/$NODE | fgrep -q '{"timestamp":'
 
