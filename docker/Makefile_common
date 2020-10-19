@@ -3,41 +3,61 @@
 IMAGE_NAME ?= UNDEF--do-not-run-this-file-directly
 CONTAINER_NAME ?= UNDEF--do-not-run-this-file-directly
 CONTAINER_HOSTNAME ?= UNDEF--do-not-run-this-file-directly
-EXTERNAL_STORAGE ?= /UNDEF--do-not-run-this-file-directly
+
+# Separate shared network between containers
+NETWORK = ovds_network
+
+# Choose docker or podman
+FRONTEND=sudo podman
+FRONTEND=docker
+
+# Define path to common data dir
+# https://stackoverflow.com/questions/18136918/how-to-get-current-relative-directory-of-your-makefile
+THIS_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+SHARED_DATA_DIR = ${THIS_DIR}/../data
 
 default:
 	@echo "make [build|buildnew|run|clean|logs|shell|stop|test|kill|rm|rmi]"
 
 build:
-	docker build --tag=${IMAGE_NAME} . \
+	${FRONTEND} build --tag=${IMAGE_NAME} . \
 
 buildnew:
-	docker build --no-cache --tag=${IMAGE_NAME} .
+	${FRONTEND} build --no-cache --tag=${IMAGE_NAME} .
 
-run:
-	docker run -ti -h "${CONTAINER_HOSTNAME}" -d -v "${EXTERNAL_STORAGE}:/tmp/FIXME" --name=${CONTAINER_NAME} ${IMAGE_NAME} /bin/bash
+datadir:
+	# Just to ensure bind mounted host data dir exists
+	mkdir -p "${SHARED_DATA_DIR}"
+
+network:
+	# Just to ensure network is created first
+	${FRONTEND} network ls | fgrep -w ${NETWORK} || ${FRONTEND} network create ${NETWORK}
+
+# Run default CMD (from Dockerfile), or whatever is specified if $CMD # variable was set
+run: datadir network
+	echo ${SHARED_DATA_DIR}
+	${FRONTEND} run -ti -h "${CONTAINER_HOSTNAME}" -d --network=${NETWORK} -v "${SHARED_DATA_DIR}:/data:z" --name=${CONTAINER_NAME} ${IMAGE_NAME} ${CMD}
 
 clean: kill rm rmi
 
 logs:
-	docker logs -f ${CONTAINER_NAME}
+	${FRONTEND} logs -f ${CONTAINER_NAME}
 
 shell:
-	docker exec -it ${CONTAINER_NAME} /bin/bash
+	${FRONTEND} exec -it ${CONTAINER_NAME} /bin/bash
 
 stop:
-	docker stop ${CONTAINER_NAME}
+	${FRONTEND} stop ${CONTAINER_NAME}
 
 test:
-	docker exec -t ${CONTAINER_NAME} /db/test.sh
+	${FRONTEND} exec -t ${CONTAINER_NAME} ./test.sh
 
 kill:
-	@docker kill ${CONTAINER_NAME}
-	@docker rm -v ${CONTAINER_NAME} >/dev/null || echo "Container removed already"
+	@${FRONTEND} kill ${CONTAINER_NAME} 2>/dev/null || echo "Container seems not running"
 
-rm:
-	@docker rm -v ${CONTAINER_NAME} >/dev/null || echo "Container removed already"
+rm: kill  # always kill, then rm
+	@${FRONTEND} rm -v ${CONTAINER_NAME} 2>/dev/null || echo "Container seems removed already"
 
 rmi:
-	@docker rmi ${IMAGE_NAME} 2>/dev/null || echo "Image removed already"
+	@${FRONTEND} rmi ${IMAGE_NAME} 2>/dev/null || echo "Image seems removed already"
 
