@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:19.10
 RUN apt-get update
 
 # Standard fix of TZDATA first because otherwise it tries user-interactive
