@@ -7,7 +7,8 @@ ADD tzdata.sh /tmp/tzdata.sh
 RUN /tmp/tzdata.sh
 
 # Install the rest of the needed packages
-RUN apt-get install -y apt-transport-https git golang screen psmisc curl iputils-ping --fix-missing
+RUN apt-get install -y git psmisc curl iputils-ping
+RUN apt-get install -y golang
 
 # Fetch, build and sanity-test server
 WORKDIR /

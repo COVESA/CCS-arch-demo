@@ -7,11 +7,10 @@ RUN apt-get update
 ADD tzdata.sh /tmp/tzdata.sh
 RUN /tmp/tzdata.sh
 
-# TODO: ADD ANY MISSING PACKAGE
-RUN apt-get install -y apt-transport-https git screen psmisc curl iputils-ping gnupg
+RUN apt-get install -y git psmisc curl iputils-ping
+RUN apt-get install -y apt-transport-https gnupg
 
 # Package sources for grafana
-RUN ls
 RUN curl -s https://packages.grafana.com/gpg.key | apt-key add -
 RUN echo "deb https://packages.grafana.com/oss/deb stable main" | tee -a /etc/apt/sources.list.d/grafana.list 
 RUN apt-get update
