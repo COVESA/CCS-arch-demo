@@ -1,9 +1,20 @@
-language: minimal
+git:
+  submodules: true
+
+language: bash
 
 services:
   - docker
 
+env:
+  - TERM=xterm
+
 script:
-  - cd docker/gen2-server
-  - make build
+  - cd docker && ls -lR && make build run
+  - docker logs ovds-server
+  - docker logs ovds-client
+  - docker logs statestorage
+  - docker logs w3c-gen2-server
+  - docker logs grafana
+#  - docker logs livesim
 
