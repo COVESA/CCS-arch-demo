@@ -7,3 +7,6 @@
 [submodule "vehicle_signal_specification"]
 	path = vehicle_signal_specification
 	url = https://github.com/GENIVI/vehicle_signal_specification
+[submodule "ios-vss-graphql-client-demo"]
+	path = ios-vss-graphql-client-demo
+	url = https://github.com/highmobility/ios-vss-graphql-client-demo
