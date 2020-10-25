@@ -7,9 +7,9 @@ CONTAINER_HOSTNAME ?= UNDEF--do-not-run-this-file-directly
 # Separate shared network between containers
 NETWORK = ovds_network
 
-# Choose docker or podman
-FRONTEND=sudo podman
-FRONTEND=docker
+# choose docker or podman. Can also be predefined at runtime and in that
+# case ?= will not reassign it.
+FRONTEND ?= docker
 
 # Define path to common data dir
 # https://stackoverflow.com/questions/18136918/how-to-get-current-relative-directory-of-your-makefile
