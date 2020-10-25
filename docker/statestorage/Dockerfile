@@ -10,7 +10,7 @@ RUN /tmp/tzdata.sh
 RUN apt-get install -y git psmisc curl iputils-ping
 RUN apt-get install -y golang
 
-RUN cd / && git clone https://github.com/gunnarx/ccs-w3c-client -b fix_and_refactor_init_db
+RUN cd / && git clone https://github.com/GENIVI/ccs-w3c-client
 WORKDIR /ccs-w3c-client/statestorage
 RUN go get -v . || true  # There's a failure, but it seems to at least fetch sqlite3 library
 RUN go build
