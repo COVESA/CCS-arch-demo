@@ -23,9 +23,8 @@ RUN cd /ccs-w3c-client/livesim && go build
 RUN cd /ccs-w3c-client/ovds/server && go build
 
 # Program start is encoded in the script
-ADD livesim_start.sh .
-
 WORKDIR /ccs-w3c-client
+ADD livesim_start.sh .
 CMD ./livesim_start.sh
 
 
