@@ -4,7 +4,7 @@ echo '--------------------------------------------------'
 echo Starting local ovds-server
 echo '--------------------------------------------------'
 cp /data vsspathlist.
-ovds/server/server /data/ovds.db /data/vss_gen2.cnative &
+ovds/server/server /data/ovds_simulator_input.db /data/simulator_input.cnative &
 echo
 echo '--------------------------------------------------'
 echo 'Pause...'
@@ -15,6 +15,6 @@ echo '--------------------------------------------------'
 echo Starting livesim
 echo '--------------------------------------------------'
 cd livesim # Must cd, because program expects vsspathlist.json in current directory
-./livesim VIN001 localhost /data/statestorage.db
+./livesim ANON_VIN localhost /data/statestorage.db
 echo DONE
 
