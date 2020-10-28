@@ -3,11 +3,11 @@
 
 default: build run
 
-build: info1 build1 build2 build3 build4 build5 build6
+build: info1 build1 build2 build3 build4 build5 build6 build7
 
 # FIXME: client (run2) must run twice, once first to create the ovds
 # database file, then again after the server has started?
-run: info2 run1 run2 run3 run4 run2 run5 run6
+run: info2 run1 run2 run3 run4 run2 run5 run6 run7
 
 info1:
 	@echo "=========================================================="
@@ -44,6 +44,11 @@ build6:
 	@echo "w3c-gen2-server"
 	@echo "----------------------------------------------------------"
 	cd w3c-gen2-server && make build | egrep -i '^Step '
+build7:
+	@echo "----------------------------------------------------------"
+	@echo "nodejs-client"
+	@echo "----------------------------------------------------------"
+	cd nodejs-client && make build | egrep -i '^Step '
 
 # NOTE: "make rm run" will first rm old instance, then run new instance
 info2:
@@ -51,14 +56,37 @@ info2:
 	@echo "STARTING ALL CONTAINER IMAGES"
 	@echo "----------------------------------------------------------"
 run1:
+	@echo "----------------------------------------------------------"
+	@echo "Start: ovds-server"
+	@echo "----------------------------------------------------------"
 	cd ovds-server && make rm run
 run2:
+	@echo "----------------------------------------------------------"
+	@echo "Start: ovds-client"
+	@echo "----------------------------------------------------------"
 	cd ovds-client && make rm run
 run3:
+	@echo "----------------------------------------------------------"
+	@echo "Start: w3c-gen2-server"
+	@echo "----------------------------------------------------------"
 	cd w3c-gen2-server && make rm run
 run4:
+	@echo "----------------------------------------------------------"
+	@echo "Start: statestorage"
+	@echo "----------------------------------------------------------"
 	cd statestorage && make rm run
 run5:
+	@echo "----------------------------------------------------------"
+	@echo "Start: grafana"
+	@echo "----------------------------------------------------------"
 	cd grafana && make rm run
 run6:
+	@echo "----------------------------------------------------------"
+	@echo "Start: livesim"
+	@echo "----------------------------------------------------------"
 	cd livesim && make rm run
+run7:
+	@echo "----------------------------------------------------------"
+	@echo "Start: nodejs-client"
+	@echo "----------------------------------------------------------"
+	cd nodejs-client && make rm run

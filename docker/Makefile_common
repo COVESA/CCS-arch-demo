@@ -7,6 +7,8 @@ CONTAINER_HOSTNAME ?= UNDEF--do-not-run-this-file-directly
 # Separate shared network between containers
 NETWORK = ovds_network
 
+.PHONY: logs
+
 # choose docker or podman. Can also be predefined at runtime and in that
 # case ?= will not reassign it.
 FRONTEND ?= docker
