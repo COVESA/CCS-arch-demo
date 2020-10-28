@@ -15,6 +15,7 @@ RUN apt-get install -y screen
 WORKDIR /
 RUN git clone https://github.com/MEAE-GOT/W3C_VehicleSignalInterfaceImpl
 WORKDIR /W3C_VehicleSignalInterfaceImpl
+RUN cd server/service_mgr && ln -s /data/statestorage.db
 RUN go build
 #ADD tests/build-sanity.sh /server/
 #RUN /server/build-sanity.sh  # Fails fetch test
