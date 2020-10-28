@@ -14,6 +14,7 @@ RUN curl -s https://packages.grafana.com/gpg.key | apt-key add -
 RUN echo "deb https://packages.grafana.com/oss/deb stable main" | tee -a /etc/apt/sources.list.d/grafana.list 
 RUN apt-get update
 RUN apt-get install -y grafana
+RUN apt-get install -y telnet net-tools
 
 # Enable server
 RUN update-rc.d grafana-server defaults 95 10
