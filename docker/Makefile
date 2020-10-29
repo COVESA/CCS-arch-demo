@@ -90,3 +90,11 @@ run7:
 	@echo "Start: nodejs-client"
 	@echo "----------------------------------------------------------"
 	cd nodejs-client && make rm run
+logs:
+	cd ovds-client && make logs >ovds-client.log || true
+	cd w3c-gen2-server && make logs >w3c-gen2-server.log || true
+	cd statestorage && make logs >statestorage.log || true
+	cd grafana && make logs >grafana.log || true
+	cd livesim && make logs >livesim.log || true
+	cd ovds-server && make logs >ovds-server.log || true
+	cd nodejs-client && make logs >ovds-server.log || true
