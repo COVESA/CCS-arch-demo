@@ -1,7 +1,11 @@
 # Makefile to update & start all client & server components
 # It's in a somewhat unusual style but works for the purpose
 
+# Unless defined differently
+FRONTEND ?= docker
+
 default: build run
+	echo Frontend is ${FRONTEND}
 
 build: info1 build1 build2 build3 build4 build5 build6 build7
 
@@ -12,6 +16,7 @@ run: info2 run1 run2 run3 run4 run2 run5 run6 run7
 info1:
 	@echo "=========================================================="
 	@echo "BUILDING ALL CONTAINER IMAGES (NOTE: OUTPUT IS SHORTENED)"
+	@echo "Frontend is ${FRONTEND}"
 	@echo "=========================================================="
 	@echo
 build1:
@@ -54,6 +59,7 @@ build7:
 info2:
 	@echo "----------------------------------------------------------"
 	@echo "STARTING ALL CONTAINER IMAGES"
+	@echo "Frontend is ${FRONTEND}"
 	@echo "----------------------------------------------------------"
 run1:
 	@echo "----------------------------------------------------------"
@@ -98,3 +104,5 @@ logs:
 	cd livesim && make logs >livesim.log || true
 	cd ovds-server && make logs >ovds-server.log || true
 	cd nodejs-client && make logs >ovds-server.log || true
+clean:
+	rm */*.log
