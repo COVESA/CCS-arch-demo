@@ -10,3 +10,6 @@
 [submodule "ios-vss-graphql-client-demo"]
 	path = ios-vss-graphql-client-demo
 	url = https://github.com/highmobility/ios-vss-graphql-client-demo
+[submodule "docker/vss-graphql"]
+	path = docker/vss-graphql
+	url = https://github.com/GENIVI/vss-graphql
